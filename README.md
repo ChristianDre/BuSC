@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Blockchain & Smart Contracts - Point of Sale App on Solana
 
 Ziel dieser decentralized Application ist es einen QR Code zu generieren der mithilfe von einer Solana Wallet gescannt werden kann und eine Transaktion zwischen 2 Wallets auslöst. In programs/AnchirAPp/src/lib.rs ist der Smart Contract auch Program genannt, der per Javascript API innerhalb der Applikation in app/src aufgerufen wird.
@@ -61,3 +62,23 @@ localhost:3000 öffnen und QR Code neu generieren
 3. Phantom Wallet (https://phantom.app/) als App auf dem Androird/iOS Smartphone öffnen, Wallet erstellen bzw. Seed Phrase eingeben & QR Code scannen
 
 
+=======
+# BuSC
+
+start program deployment app folder:
+- anchor deploy
+
+deploy it to devnet:
+- solana program deploy /home/cdre/Repos/AnchirAPp/target/deploy/anchir_a_pp.so
+
+start app:
+-cd app
+-npm install
+-npm start
+
+go to localhost://3000
+
+Vorbedingungen:
+anchor.toml einstellungen der eigenen wallet angleichen
+phantom wallet app auf dem Handy
+>>>>>>> 9633366aea277e0571918504bfcecf6746859f30
