@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState, setState } from "react";
 import './App.css';
-import { clusterApiUrl, Connection, PublicKey, Keypair } from '@solana/web3.js';
+import { clusterApiUrl, Connection, PublicKey, Keypair, SystemProgram } from '@solana/web3.js';
 import { encodeURL, findTransactionSignature, FindTransactionSignatureError } from '@solana/pay';
 import BigNumber from 'bignumber.js';
 import QRCodeStyling from "qr-code-styling";
-
+// hier nur das styling des QR Codes (sowie in App.css)
 const qrCode = new QRCodeStyling({
   width: 300,
   height: 300,
@@ -19,7 +19,7 @@ const qrCode = new QRCodeStyling({
     margin: 2,
   }
 });
-
+// hier muss die Url gesetet werden, dises wird dann zum QR Code umgewandelt
 function App() {
   const [url, setUrl] = useState("https://qr-code-styling.com");
   const ref = useRef({});
@@ -30,19 +30,19 @@ function App() {
   useEffect(() => {
     qrCode.append(ref.current);
   }, []);
-
+// hier muss der QR Code neu generiert werden wenn der Button gedrückt wird
   useEffect(() => {
     qrCode.update({
       data: url
     });
   }, [url]);
-
+// hier wird der Status der Transaktion abgefragt
   async function getTxnStatus(connection, reference) {
     let signatureInfo;
     let count = 0
 
     return new Promise((resolve, reject) => {
-
+// checkt den Status im Intervall von 1,5 Sekunde, wenn keine Transaktion stattgefunden hat, wird der Status "failed" zurückgegeben
       const interval = setInterval(async () => {
         console.log('Checking for transaction...', count);
         try {
@@ -62,19 +62,19 @@ function App() {
        1500);
     });
   }
-
+// hier wird die Transaktion erstellt mit dem Token des Program/ Smart Contracts
   async function createTxn() {
 
-
+// hier mussdeklariert werden, welche Connection, wieviel und welcher Empfänger
     const connection = new Connection(clusterApiUrl('devnet'), 'confirmed');
-
+    const program = new SystemProgram(connection.getProgramAccounts().get("2w6CVpFev9J4i9gPSwVf9HqNPUf4F4a3MxnLdh6TnYLf"));
     const recipient = new PublicKey('FBfpvgnrMd3YnApwd13VV8Xmaf8cyXD1Q4xKmYudPiut');
     const amount = new BigNumber(0.1);
     const reference = new Keypair().publicKey;
     const label = 'Chris Smart Contract Store';
     const message = 'Thank you for your purchase!';
     const memo = 'PurchaseID: 12345';
-
+// hier wird die URL aus folgenden bestandteilen zusammengebaut:
     const url = encodeURL({ recipient, amount, reference, label, message, memo });
     setUrl(url)
     try {
@@ -89,7 +89,7 @@ function App() {
   }
 
   return (
-
+// Frontend
     <div className="App">
       <div>
         <h1>
