@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Blockchain & Smart Contracts - Point of Sale App on Solana
 
 Ziel dieser decentralized Application ist es einen QR Code zu generieren der mithilfe von einer Solana Wallet gescannt werden kann und eine Transaktion zwischen 2 Wallets auslöst. In programs/AnchirAPp/src/lib.rs ist der Smart Contract auch Program genannt, der per Javascript API innerhalb der Applikation in app/src aufgerufen wird.
